@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>com.usermanagement.app</groupId>
+    <artifactId>user-service-parent</artifactId>
+    <version>0.1.0-SNAPSHOT</version>
+    <relativePath>../user-service-parent</relativePath>
+  </parent>
+
+  <artifactId>user-service-application</artifactId>
+
+  <name>User Service Application</name>
+  <description>User Service Application</description>
+
+  <organization>
+    <name>User Management</name>
+  </organization>
+
+  <properties>
+    <jib-maven-plugin.version>3.0.0</jib-maven-plugin.version>
+    <!-- when upgrading the JRE make sure Application Insights Agent is still working -->
+    <docker.image>adoptopenjdk/openjdk11:alpine-slim</docker.image>
+    <docker.image.prefix>app</docker.image.prefix>
+    <docker.image.name>user-service</docker.image.name>
+  </properties>
+
+  <dependencies>
+
+    <!-- Internal Dependency -->
+    <dependency>
+      <groupId>com.usermanagement.app</groupId>
+      <artifactId>user-service-domain</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.usermanagement.app</groupId>
+      <artifactId>user-service-infrastructure</artifactId>
+    </dependency>
+
+    <!-- Spring Boot -->
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-validation</artifactId>
+    </dependency>
+
+    <!-- Spring Cloud -->
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-openfeign</artifactId>
+    </dependency>
+
+    <!-- Other -->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springdoc</groupId>
+      <artifactId>springdoc-openapi-ui</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.firebase</groupId>
+      <artifactId>firebase-admin</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>net.javacrumbs.shedlock</groupId>
+      <artifactId>shedlock-spring</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>net.javacrumbs.shedlock</groupId>
+      <artifactId>shedlock-provider-mongo</artifactId>
+    </dependency>
+
+    <!-- Test -->
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+      <exclusions>
+        <exclusion>
+          <groupId>org.junit.vintage</groupId>
+          <artifactId>junit-vintage-engine</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+  </dependencies>
+
+  <build>
+
+    <plugins>
+
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>build-info</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>com.google.cloud.tools</groupId>
+        <artifactId>jib-maven-plugin</artifactId>
+        <version>${jib-maven-plugin.version}</version>
+        <configuration>
+          <from>
+            <image>${docker.image}</image>
+          </from>
+          <to>
+            <image>${docker.image.prefix}/${docker.image.name}</image>
+            <!-- for local use only -->
+            <tags>
+              <tag>${project.version}</tag>
+              <tag>latest</tag>
+            </tags>
+          </to>
+          <container>
+            <mainClass>com.usermanagement.app.userservice.application.Application</mainClass>
+            <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+            <expandClasspathDependencies>true</expandClasspathDependencies>
+          </container>
+        </configuration>
+        <executions>
+          <execution>
+            <phase>install</phase>
+            <goals>
+              <goal>dockerBuild</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+    </plugins>
+
+  </build>
+
+</project>

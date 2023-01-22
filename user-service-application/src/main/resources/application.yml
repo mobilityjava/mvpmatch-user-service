@@ -1,0 +1,80 @@
+usermanagement.app:
+  email-verification: true
+  mongo:
+    database: user-service
+  doc.api.url: http://localhost:8080
+  scheduler:
+    enabled: true
+  cache:
+    enabled: true
+    contract-service:
+      shopping-cards-evict: PT1M
+      scratch-cards-evict: PT1M
+  firebase:
+    enabled: true
+    credentials:
+      type: "service_account"
+      auth_uri: "https://accounts.google.com/o/oauth2/auth"
+      project_id: "mobility-app-992f1"
+      private_key_id: "69c9920b676a5c0b90930e2b2e60a824e11a428f"
+      private_key: "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCVybGONEMikbjl\nWs4k9Fdof8V9TYXpdR6A8r8cUyUPsJJEBNspmzLEuYbqJDrAPbNBU8kLMIrqurQW\nmW274OrLPEXVb8SL6T4kqLXUtsivzkWacZ1L7s7aK5p71WmREq1RFjVcZHf1a8bt\nTRNDVs8dZDoEUuJpi+l3gqwF6uX6gtC7JmdSu8O2MAZxrwFCMNVWMuj+9xGJKrG9\nYG3b7KmWc4oPQ1uj0lwWVDhrcjLxZAP8Kp8gGv/p52zEdlL0XQouG1FWywhWrS+A\nLuDuGmGGeq6Vlx4mBWCsLvdyi4rZrVmSKPyow5OW67zhXDxHpbp8DxWStPP3p2hk\ndFKla7F3AgMBAAECggEALY1VgHwXUJuFYcawO1/NdzuoOReK2nkiKi/oe7ozYqad\njK73YZtPoLEVPP6AmXcKHRtYYB1GmeTmoJrPWtwnO2BcknC3kp7/pZFjHsnplUGD\nPFlB71Y0NPgetnsr7BEEgUziNHNfYdUBfag7a/ap7PPOiwMT1OpWOWCVZQVPJFQN\n1h7nrgda6KUWASv2dIv7AHy6S0raYQk1lFuU3f0JH7P9nc813sfJudn04Z6OYcTU\nTUu3rjC47kEAJr9nSdROx+JDlRyDzGxdl8m6qIChsFGNxEV9xtUYWfOBy0l2nagc\nh1C65puU1kQQm28MZtkwi68z0NH3eLT/NDvaHARO0QKBgQDOdAnvcWBdVu7kdZbX\nc+LqrUAo2xpqja9gtNT005ba/FIlKSsnFjUEBWF81ayXUQvj1MuxhSD2BUCNh28u\nDzmctf+9gfbIOOn9C8ka1KOec3lXKnpq7HSATC+UWLcOi6/x728Q2aeIZJvRQzms\nbmE68WRxyQ/ZTdQUa0W7T2YGMQKBgQC5vEbgncZH6Tmi0CjkTa3TsA+sTSE9jHBO\npLbYomAvHrlhbu5AnUoasVfcq/5yBlqG0cEwnfU6De91UX7AvhH4aDmJuwx1sSiz\nnKepPA6luZJEMtsQOozY6WK5cFKOkXQRTsvMT0RiDc11hIpCPiRJBI8YL3rhTa2x\nww3R8PzAJwKBgExlHgQPhSQk9hNt+9pQFKjYYUR9B0JkmYAEikTqQwlXkyITINe+\n3PFW+GMUQmBf6jFtXc6bv72p5eA5PIfjtGLr6e17ORGQFe3APbOC+eS5QC5kFpaY\nVufeyUBwr5RfVkUFX6jxkY/kAtCluqK22Z3RE2UTjJzRsue3Zj9QuyURAoGAerBm\n9VrjLn9eJjFwwZaaW3oycDOm4HxTd2+QpLtl49pcxIK9eQstd0JscoVel72gsOv/\nvHirE4U/B3Uk0Hb9ceSPFW7shRXYeATkL4NPfaN+ffRGBotWnLZWE36h2jE0xXYS\nY0x9NHQ/owBBQA7Cc0VCrMw4VHm2YfUhvOt+WgMCgYANvkH6so2912LgBK3W2Qfg\nN6J5ytdM4pkKlFhWgbaXmXtHXcNDQ60gOywM9VuZCIRFSL9p1ZMCuwFtQ2ZqHePz\nl4LOW7LQOPc/Yvfu+yXIdhLxt3LqDUJgVp1v+3kHrStLUC6TuQYYc61oNK6DUBNl\nhu72uAoCUyL0a9DhrZG38w==\n-----END PRIVATE KEY-----\n"
+      client_email: "firebase-adminsdk-k5qc0@mobility-app-992f1.iam.gserviceaccount.com"
+      client_id: "117679705556597419769"
+      token_uri: "https://oauth2.googleapis.com/token"
+      auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs"
+      client_x509_cert_url: "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-k5qc0%40mobility-app-992f1.iam.gserviceaccount.com"
+
+
+server:
+  port: 8080
+  shutdown: graceful
+
+spring:
+  application:
+    name: user-service
+  jmx:
+    enabled: false
+  data:
+    mongodb:
+      uri: mongodb://admin:admin@localhost:27017/user-service?authSource=admin
+      auto-index-creation: true
+  jackson:
+    default-property-inclusion: non_null
+  cloud:
+    discovery:
+      enabled: false
+
+springdoc:
+  packagesToScan: com.usermanagement.app.userservice.application
+  pathsToMatch: /**
+  swagger-ui:
+    path: /swagger-ui/api-docs.html
+
+# actuator settings
+management:
+  health:
+    circuitbreakers.enabled: true
+  endpoint:
+    health:
+      show-details: when_authorized
+
+  endpoints:
+    web:
+      exposure:
+        include: health, caches, env, info, loggers, metrics, mappings
+
+# CircuitBreaker
+# see https://resilience4j.readme.io/docs/circuitbreaker#create-and-configure-a-circuitbreaker
+resilience4j:
+  circuitbreaker:
+    instances:
+      contract-service:
+        registerHealthIndicator: true
+        failureRateThreshold: 50
+        slowCallRateThreshold: 75
+        slowCallDurationThreshold: 10s
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 100
+        minimumNumberOfCalls: 10
+        ignoreExceptions:
+          - feign.FeignException.FeignClientException

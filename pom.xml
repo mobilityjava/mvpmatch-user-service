@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.usermanagement.app</groupId>
+  <artifactId>user-service</artifactId>
+  <packaging>pom</packaging>
+  <version>0.1.0-SNAPSHOT</version>
+
+  <name>User Service Build</name>
+  <description>User Service Build</description>
+
+  <organization>
+    <name>User Management</name>
+  </organization>
+
+  <modules>
+    <module>user-service-dependencies</module>
+    <module>user-service-parent</module>
+    <module>user-service-application</module>
+    <module>user-service-domain</module>
+    <module>user-service-infrastructure</module>
+  </modules>
+
+</project>

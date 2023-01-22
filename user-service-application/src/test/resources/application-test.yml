@@ -1,0 +1,9 @@
+usermanagement.app:
+  cache.enabled: false
+  firebase.enabled: false
+
+spring:
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration
+      - org.springframework.boot.autoconfigure.data.mongo.MongoRepositoriesAutoConfiguration

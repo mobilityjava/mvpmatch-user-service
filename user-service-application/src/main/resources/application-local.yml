@@ -1,0 +1,14 @@
+server:
+  port: 8100
+
+usermanagement.app:
+  doc.api.url: http://localhost:8080
+  email-verification: false
+  firebase:
+    enabled: true
+
+logging:
+  level:
+    com.usermanagement.app: debug
+
+
